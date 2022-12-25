@@ -1,16 +1,18 @@
+use clap::Parser;
 use tesseract::Tesseract;
 
+/// Shazam for videos
+#[derive(Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    /// Path to screenshot to extract from
+    #[arg(short, long)]
+    path: String,
+}
+
 fn main() -> () {
-    print!("-----IMAGE ONE-----");
-    image_to_text("./assets/image.jpg");
-    print!("-----IMAGE TWO-----");
-    image_to_text("./assets/image2.jpg");
-    print!("-----IMAGE THREE-----");
-    image_to_text("./assets/image3.jpeg");
-    print!("-----IMAGE FOUR-----");
-    image_to_text("./assets/image4.jpeg");
-    print!("-----IMAGE FIVE-----");
-    image_to_text("./assets/image5.jpeg");
+    let args = Args::parse();
+    image_to_text(&args.path);
 }
 
 fn image_to_text(path: &str) {
